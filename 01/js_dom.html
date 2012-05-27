@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<title>表单例子</title>
+	</head>
+	<body>
+		<h1>表单</h1>
+		<h2>登陆表单</h2>
+		<fieldset>
+			<form action='no320.com/formrequest.do' method='get'>
+				<input type="text" name='username' value="i'm the input text" placeholder='请输入用户名'/>
+			 	<input type="password" name='testfield' value="i'm the input text" placeholder='请输入密码'/>				
+			 	<input type='submit' value='提交' onclick='verifyPasswordLength();'>
+			</form>
+		</fieldset>
+	</body>
+	<script type='text/javascript'>
+		 function verifyPasswordLength(){
+		 	//document.getElementById(“result”).innerHTML = xmlDoc.getElementsByTagName//(“name”)[0].childNodes[0].nodeValue; }
+
+		 	var passwd = document.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+		 	alert(passwd);
+		 	if(passwd.length()>=6){
+		 		alert(1);
+		 	}else{
+		 		alert(0);	
+		 	}
+		 }
+	</script>
+</html>

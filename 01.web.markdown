@@ -1,0 +1,158 @@
+# 序言：论述webapp和native app之争 #
+
+# web开发，js,html5,css3 #
+全文贯穿原生js和jQuery解释。只提供要点，具体细节请读者自己探索
+
+## 关于div+css概述 ##
+此处需要讲浏览器兼容性
+
+我最早接触web开发是通过adobe Dreamweaver，它是一个可视化的所见即所得看法工具,所见即所得说白了就是拖拖,
+	Insert sss.png
+	
+这东西特别简单，适合初学者，越是定制的东西它就显得不那么灵活，大多数人使用布局都是table来控制的，而且是table嵌入table，反复嵌套，导致代码可读性非常差，难于维护。所以div+css方式开始变得流行。
+实际上东西还是那些东西，只不过布局处理都用div来处理，div的位置由css控制，废弃的table只用于它最常用的功能，比如表单布局和数据显示。
+
+纯的html和css只能做静态效果。
+因为那些年：
+* css3还有出生，css还没有动画功能
+* js还是一个高级的东西（那时候还不懂dom）
+
+那些年的动态网页：
+* 动态修改页面内容，比如自动播放n张图片
+* 动态获取内容，增加fade,slide之类的效果
+
+随着应用开发越来越强大和时代进步，浏览器兼容性问题尤其突出。万恶的ie让所有前端开发人员都痛苦不已，苦逼的岁月被ie糟蹋了
+
+为啥ie是万恶的呢？
+* 它的js机制和其他浏览器不一样，事件模型不一样
+* 它对css解析不一样，经常需要单独处理。
+* 它太嚣张了，使用率太高，而微软又固执的不愿修改
+
+
+## 基本元素 ##
+html语言是markup语言，这种语言的特点是格式固定，比如有<html>就必然有</html>对应
+
+看一个简单的hello world吧
+
+	<html>
+		<head>
+			<title>看一个简单的hello world吧</title>
+		</head>
+		<body>
+			<div>hello world,俗吧</div>	
+		</body>
+	</html>
+	
+用浏览器打开它，看到是乱码？这是为什么呢？答案是因为里面有中文字符。所以修改一下
+
+	<html>
+		<head>
+			<meta http-equiv="content-type" content="text/html;charset=utf-8">
+			<title>看一个简单的hello world吧</title>
+		</head>
+		<body>
+			<div>hello world,俗吧</div>	
+		</body>
+	</html>
+
+看看dw里的可以拖拽的控件吧
+
+@see component.html
+
+## 多页跳转 ##
+我们知道网站是由多个页面组成的，而页面直接通过跳转完成交互。页面跳转有3种方式：
+
+1）表单提交
+
+<form action='no320.com/formrequest.do' method='get'>
+	<input type="text" name='testfield' vaslue="i'm the input text" placeholder='我是占位的input text'/>
+	<input type='submit' value='提交'>
+</form>
+
+2）超链接
+<a href='no320.com' target='_blank'>no320.com</a>
+
+3）js方法
+
+window.location.href='no320.com';
+
+看一下例子代码
+
+	<html>
+		<head>
+			<meta http-equiv="content-type" content="text/html;charset=utf-8">
+			<title>多页跳转</title>
+		</head>
+		<body>
+			<h1>多页跳转</h1>
+			<h2>1）表单提交</h2>
+		
+				<form action='no320.com/formrequest.do' method='get'>
+					<input type="text" name='testfield' vaslue="i'm the input text" placeholder='我是占位的input text'/>
+					<input type='submit' value='提交'>
+				</form>
+		
+			<h2>2）超链接</h2>
+		
+				<a href='no320.com' target='_self'>no320.com</a> || 
+				<a href='no320.com' target='_blank'>no320.com</a> || 
+				<a href='no320.com' target='_parent'>no320.com</a>
+		
+			<h2>3）js方法</h2>
+				
+				window.location.href='no320.com';
+				<input type='button' value='点击跳转' onclick='jsClickToPage();'>
+				
+		</body>
+		<script type='text/javascript'>
+			function jsClickToPage(){	
+				alert('正在跳转到no320.com');
+				window.location.href='no320.com';
+			}
+		</script>
+	</html>
+
+
+## 表单 ##
+这里只是演示了跳转方式，那么页面之间如何传递消息呢？我们先了解一下表单是什么。
+
+表单是一种用于数据传递的形式。举个简单的例子，用户登陆，把某种商品放到购物车，这些操作都是通过表单提交来实现的。
+看一下登陆的例子:
+
+	<form action='no320.com/formrequest.do' method='get'>
+		<input type="text" name='testfield' vaslue="i'm the input text" placeholder='请输入用户名'/>
+		<input type="password" name='testfield' vaslue="i'm the input text" placeholder='请输入密码'/>
+		<input type='submit' value='提交'>
+	</form>
+
+它的格式是<form action='$1' method='$2' multy='$3'/>
+说明：
+* $1 是表单要提交到后台的地址，此地址可以处理表单请求
+* $2 是表单提交方法，一般是get和post。
+* $3 如果表单有附件上传，需要支持多部头信息
+表单提交：<input type='submit' value='提交'>
+
+常用表单控件：
+select
+input {text|button|submit|reset|hidden}
+textarea
+label
+
+## js和html交互（dom操作） ##
+比如表单校验，已前面的例子为例：如果用户输入密码少于6个字母不允许登录
+
+
+
+
+## 关于事件模型 ##
+## post和get ##
+## ajax使用 ##
+## json和jsonp,xml举例 ##
+## 如何使用css修改显示样式 ##
+## 理解css盒子模型 ##
+## 理解css sprite ##
+## 开发与调试工具 ##
+## js测试与压缩 ##
+## js oo ##
+## 关于雅虎36条军规 ## 
+

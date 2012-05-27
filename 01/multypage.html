@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<title>多页跳转</title>
+	</head>
+	<body>
+		<h1>多页跳转</h1>
+		<h2>1）表单提交</h2>
+		
+			<form action='no320.com/formrequest.do' method='get'>
+				<input type="text" name='testfield' vaslue="i'm the input text" placeholder='我是占位的input text'/>
+				<input type='submit' value='提交'>
+			</form>
+		
+		<h2>2）超链接</h2>
+		
+			<a href='no320.com' target='_self'>no320.com</a> || 
+			<a href='no320.com' target='_blank'>no320.com</a> || 
+			<a href='no320.com' target='_parent'>no320.com</a>
+		
+		<h2>3）js方法</h2>
+	
+		window.location.href='no320.com';
+		 
+		<input type='button' value='点击跳转' onclick='jsClickToPage();'>
+
+
+	</body>
+	<script type='text/javascript'>
+		function jsClickToPage(){	
+			alert('正在跳转到no320.com');
+			window.location.href='no320.com';
+		}
+	</script>
+</html>
