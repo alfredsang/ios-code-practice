@@ -202,7 +202,8 @@
 ## 其他
 	
 ios-code-practice
-=================
+
+
 
 关于 ios 开发 web app 与 native app 知识梳理
 一、序言
@@ -271,3 +272,11 @@ ios-code-practice
 3、 4、 5、 6、
 
 
+iwills
+
+first
+list web and oc issue，then call pg
+
+
+关于tools
+http://phonegap.com/tools
