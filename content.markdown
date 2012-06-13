@@ -1,3 +1,5 @@
+
+
 # 序言：论述webapp和native app之争 #
 
 # web开发，js,html5,css3
@@ -144,9 +146,6 @@
 	}
 	
 - 
-
-
-
 
 ## 关于广告 
 ## 关于newStands新闻杂志 

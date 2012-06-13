@@ -1,6 +1,8 @@
 iPhone 路径大全
 ==========================
+Protecting resources in iPhone and iPad apps
 
+http://aptogo.co.uk/2010/07/protecting-resources/
 
 1、【/Applications】
 常用软件的安装目录 
