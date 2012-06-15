@@ -1,0 +1,58 @@
+
+
+
+
+模拟Get请求
+
+
+NSString *url =  [[NSString stringWithFormat:@"%@%@",DATA_ENV.urlRequestHost, @"?m=api_user&a=guestbookadd&"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+ 
+ 
+ url = [url stringByAppendingFormat:@"email=%@&",emailAddr];
+ url = [url stringByAppendingFormat:@"message=%@&",mesg];
+ url = [url stringByAppendingFormat:@"client=%d",0];
+ url = [url  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+ 
+ 
+ UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectZero] autorelease];
+ webView.delegate = nil;
+ webView.scalesPageToFit = YES;
+ [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+
+
+
+
+
+
+1、请求优化
+标题加载完成就算加载成功
+
+2、内容加载机制
+然后异步读取正文内容
+正文内容每0.2秒加载5个<p>标签
+快速翻的时候内存少
+不需要完全加载再显示
+滚动事件监听
+这点也是延时加载的一种方式
+
+3、引入phonegap1.8
+它对webview优化非常好
+为[相关文章]功能扩展做好准备
+
+4、职责划分
+js确认图片是否加载成功
+字体变化
+考虑放弃jquery，使用zepto.js
+
+5、页面优化
+页面渲染原理
+功能基本已有，zepto.js才9k，而jq大小20k+，zepto的缺点是暂无插件机制
+考虑引入一个css布局，争取可以完成各个版本的适配
+
+
+
+
+
+
+
+
