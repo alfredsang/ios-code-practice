@@ -169,6 +169,153 @@ label
 
 
 ## ajax使用 ##
+以前的交互方式都是页面之间跳转或iframe来完成数据交互的。那么能不能不页面刷新就完成这样的功能交互呢？答案是ajax
+
+
+
+给出个简单的例子，我想在页面里加载No320.ajax.js文件，并在ajaxDiv中显示
+
+	var xhr;
+	function testAjax() {
+	    var url = "No320.ajax.js";
+	    xhr = new XMLHttpRequest();
+	    xhr.open("POST", url, true);
+	    xhr.onreadystatechange = callback;
+	    xhr.send(null);
+	}
+
+	function callback() {
+	  	if(xhr.readyState == 4 && (xhr.status == 200||xhr.status == 0) ) {		  
+		      document.getElementById("ajaxDiv").innerHTML = xhr.responseText;
+		}
+	}
+代码其实很简单。核心是XMLHttpRequest这个对象。
+她有3个方法，open和send是常规方法，用于指定请求方式和发送请求，只open没有send的话相当于没有执行
+
+另外还有一个onreadystatechange方法，此方法用于检测xhr的readyState属性变化的方法。此属性每次变化她都会调用一次。
+
+xhr的readyState属性可选值：
+	0：
+	1：
+	2：
+	3：
+	4：
+
+所以我们看callback方法里，会根据readyState和status值来判断接下来我们要做的事情，以本例来讲就是xhr.responseText在ajaxDiv中显示出来。
+至此，相信你已经了解什么ajax和她的大致原理了。
+
+接下来我们看一下jQuery的方法
+$.ajax
+$.get
+$.post
+$.getJSON
+$.script
+$.load
+
+原理其实也都是上面所讲的
+比如，我们简化一下get方法，我们希望
+
+	$.get("No320.ajax.js",function(respText){
+		 //alert(respText);
+		 document.getElementById("ajaxGetDiv").innerHTML = respText;
+	});
+	
+如何来实现呢？
+
+给出改进后的No320.ajax.js代码：
+	/*类机制定义*/
+	window.Class = function(name, src) {
+	    src.constructor.prototype = src;
+	    window[name] = src.constructor;
+	};
+
+	/*No320Ajax类*/
+	Class("No320Ajax", {
+		constructor: function() {
+			xhr=new XMLHttpRequest();
+			cb=function(){};
+			return this;
+		},
+		get:function(url,callback){
+			cb=callback;
+			this.__ajax(url,"GET");
+		},
+		post:function(url,callback){
+			cb=callback;
+			this.__ajax(url,"POST");
+		},
+		__ajax:function(url,type) {
+		    xhr.open(type, url, true);
+		    xhr.onreadystatechange = this.__callback;
+		    xhr.send(null);
+		},
+		__callback:function(){
+			//alert(xhr.responseText);
+			if(xhr.readyState == 4 && (xhr.status == 200||xhr.status == 0) ) {
+				cb(xhr.responseText);    
+			}
+		}
+	})
+
+看一下测试方法
+
+	//def alias
+	window.$ = new No320Ajax();
+
+	//test
+	//TODO:实现请求队列
+	function testAjax() {
+		$.get("No320.ajax.js",function(respText){
+			 //alert(respText);
+			 document.getElementById("ajaxGetDiv").innerHTML = respText;
+		});
+	
+		setTimeout(function(){
+			$.post("No320.ajax.js",function(respText){
+				//alert("post"+respText);
+				document.getElementById("ajaxPostDiv").innerHTML = respText;
+			});
+		},2000);
+	}
+
+另外我们可以看一下coffee-script/browser.js里的load实现：
+
+CoffeeScript.load = function(url, callback) {
+  var xhr;
+  xhr = new (window.ActiveXObject || XMLHttpRequest)('Microsoft.XMLHTTP');
+  xhr.open('GET', url, true);
+  if ('overrideMimeType' in xhr) {
+    xhr.overrideMimeType('text/plain');
+  }
+  xhr.onreadystatechange = function() {
+    var _ref;
+    if (xhr.readyState === 4) {
+      if ((_ref = xhr.status) === 0 || _ref === 200) {
+        CoffeeScript.run(xhr.responseText);
+      } else {
+        throw new Error("Could not load " + url);
+      }
+      if (callback) {
+        return callback();
+      }
+    }
+  };
+  return xhr.send(null);
+};
+
+这里唯一的就是设置了MimeType。
+
+还可以设置头部信息，比如gzip压缩等。
+
+
+
+
+
+
+
+
+
+
 
 
 ## json和jsonp,xml举例 ##
@@ -184,6 +331,13 @@ label
 ## js测试与压缩 ##
 
 ## js oo ##
+
+
+
+## 什么是迷你类库
+
+最近，随着移动发展徐素，出现了一种轻量级的类库。
+
 
 ## 关于雅虎36条军规 ## 
 
