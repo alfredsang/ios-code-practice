@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="qunit/qunit/qunit.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="qunit/qunit/qunit.js"></script>
+<script type="text/javascript" >
+//定义测试模块
+module( "测试示例" );
+//定义一个简单的函数，判断参数是不是数字
+function simpleTest(para) {
+  if(typeof para == "number") {
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+//开始单元测试
+test('simpleTest()', function() {
+  //列举各种可能的情况，注意使用 ! 保证表达式符合应该的逻辑
+  ok(simpleTest(2), '2是一个数字');
+  ok(!simpleTest("2"), '"2"不是一个数字');
+});
+
+// function simpleTest1(para) {
+//    return para * 2;
+//  }
+//  //开始单元测试
+//  test('simpleTest1()', function() {
+//    //列举各种可能的情况
+//    equals(simpleTest1(2), 4, '2 * 2 等于 4');
+//    equals(simpleTest(2), 3, '2 * 2 等于 3');
+//  });
+// 
+// //定义一个简单的函数，返回一个数组
+//   function simpleTest2() {
+//     return [1, 2];
+//   }
+//   //开始单元测试
+//   test('simpleTest2()', function() {
+//     //列举各种可能的情况
+//     equals(simpleTest2(), [1, 2], '函数返回数组[1, 2]');
+//     equals(simpleTest2(), [1, 1], '函数返回数组[1, 1]');
+//   });
+// 
+// 
+// //异步测试
+// module( "异步测试示例" );
+// //setTimeout
+// test('asynchronous test', function() {
+//   // 暂停测试
+//   stop();
+// 
+//   setTimeout(function() {
+//     ok(true, '完成运行');
+//     //待测试完成后，恢复
+//     start();
+//   }, 100)
+// })
+// //另一种形式
+// asyncTest('asynchronous test', function() {
+//   setTimeout(function() {
+//     ok(true);
+//     //待测试完成后，恢复
+//     start();
+//   }, 100)
+// })
+// 
+// //Ajax测试
+// function ajax(successCallback) {
+//   $.ajax({
+//     url: 'server.php',
+//     success: successCallback
+//   });
+// }
+//  
+// test('asynchronous test', function() {
+//   // 暂停测试
+//   stop();
+//  
+//   ajax(function() {
+//     // 异步调用判断
+//   })
+//  
+//   setTimeout(function() {
+//     //异步测试完成后，恢复
+//     start();
+//   }, 2000);
+// })
+
+</script>
+</head>
+<body>
+  <h1 id="qunit-header">QUnit it</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+</body>
+</html>
