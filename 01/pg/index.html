@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  
+    
+	<meta charset="utf-8">
+
+
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+	<script type="text/javascript" charset="utf-8" src="cordova-1.7.0.no320.js"></script>
+
+    <script type="text/javascript">
+
+	
+  	define("no320/test", function(require, exports, module) {
+	    /**
+	     * Creates a domready event function used to callback when page onload
+	     *
+	     * @private
+	     */
+
+		module.exports = function() {
+
+	        alert(123);
+		};
+
+	});
+	
+	var a = require('no320/test');
+	a()
+    
+    </script>
+  </head>
+  <body onload="">
+	<h1>Hey, it's Cordova!</h1>
+	<p>Don't know how to get started? Check out our <em><a target="_blank" href="http://docs.phonegap.com/en/edge/guide_getting-started_ios_index.md.html#Getting%20Started%20with%20iOS">Getting Started Guide</a></em>
+	<br />
+	<ol>
+		<li>Check your console log for any white-list rejection errors.</li>
+		<li>Add your allowed <strong>hosts</strong> in Cordova.plist/ExternalHosts (wildcards OK, don't enter the URL scheme)</li>
+	</ol>
+  </body>
+</html>

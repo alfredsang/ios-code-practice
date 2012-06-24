@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="qunit/qunit/qunit.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="qunit/qunit/qunit.js"></script>
+
+  <script type="text/javascript" src="test.js"></script>
+<script type="text/javascript" >
+
+// documentReady(function(){
+// 	
+// 	alert('init');
+// });
+
+module( "No320.iOS" );
+//定义一个简单的函数，判断参数是不是数字
+
+//开始单元测试
+test('no320.dom测试', function() {
+  //列举各种可能的情况，注意使用 ! 保证表达式符合应该的逻辑
+    equal(no320.byId('t1').innerHTML, "s", '测试byId返回值相等');
+	equal(no320.query('#t1',no320.byId('test_div') ).innerHTML, "s", 'no320.query从test_div中查询t1，返回值相等');
+});
+
+//开始单元测试
+test('no320.dom', function() {
+  //列举各种可能的情况，注意使用 ! 保证表达式符合应该的逻辑
+    equal(no320.byId('t1').innerHTML, "s", '测试byId返回值相等');
+	equal(no320.query('#t1',no320.byId('test_div') ).innerHTML, "s", 'no320.query从test_div中查询t1，返回值相等');
+});
+
+ 	no320.domReady(function(){
+	
+		//no320.init('test_div');
+		// alert(123)
+		// alert(no320.byId('qunit-header').innerHTML);
+	});
+	
+	$$(function(){
+		alert(234);
+	});
+	
+	
+	ok(function(){
+		alert(234);
+	});
+	
+</script>
+</head>
+<body>
+  <h1 id="qunit-header">No320.ios.lib.js</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+	
+	<div id='test_div' style='display:none;'>
+		<div id='t1'>s</div>
+	</div>
+
+</body>
+</html>

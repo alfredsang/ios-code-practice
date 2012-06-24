@@ -47,6 +47,11 @@ JavaScript为什么不美,我觉得amix讲的很清楚:
 * 它太嚣张了，使用率太高，而微软又固执的不愿修改
 
 
+## 所谓的高阶写法
+
+- 基本写法是常规的css，html,js各自做本分的事情
+- 所谓高阶的方式就是通过js的模板技术，动态的去生成html和css，自行去绑定事件。这是通常js UI类库做的事情。
+
 ## 基本元素 ##
 html语言是markup语言，这种语言的特点是格式固定，比如有<html>就必然有</html>对应
 
@@ -74,6 +79,7 @@ html语言是markup语言，这种语言的特点是格式固定，比如有<htm
 	</html>
 
 看看dw里的可以拖拽的控件吧
+
 
 @see component.html
 
@@ -160,9 +166,226 @@ label
 比如表单校验，已前面的例子为例：如果用户输入密码少于6个字母不允许登录
 
 
+## 什么是domready
+
+我们常常是这样写
+
+	<body onload='init();'/>
+# 序言：论述webapp和native app之争 #
+
+
+# web开发，js,html5,css3 #
+全文贯穿原生js和jQuery解释。只提供要点，具体细节请读者自己探索
+
+
+## 先说JavaScript
+
+JavaScript让人又爱又恨， 因为它独特， 卓越， 而且不可或缺。 尽管如此， 要说JavaScript很美， 恐怕也有些勉强。 JavaScript现在如日中天， 未来发展更是不可小觑。 但毕竟它的设计非常仓促1, 有些陷阱2, 有些晦涩3; 要不为啥Douglas Crockford的书名字叫《The Good Parts of JavaScript》呢? (题外话: 中文翻译叫"JavaScript语言精粹", 这实在是春秋笔法, 为圣者讳:D) 
+所以, 要是中肯的评价JavaScript: “就是不美”. 
+
+JavaScript为什么不美,我觉得amix讲的很清楚: 
+
+- JavaScript是函数式语言;
+- 是基于prototype实现的面向对象语言;
+- 是动态语言, 更像Lisp而非C/Java; 但却使用了C/Java的语法;
+- 名字里面叫Java, 其实和Java根本不搭边;
+
+结论就是JavaScript的诞生是个悲剧. 它是函数式+动态语言的优秀内核, 却硬被绑上了C/Java的语法; 如同高分屏贴膜, 又如同剑宗人士非摆出气宗架势; 带有这种语法的JavaScript就如同包裹石头的璞玉5, 外壳和内涵大不相称. 
+所以最大的别扭, 就在语法上.
+
+
+## 关于div+css概述 ##
+此处需要讲浏览器兼容性
+
+我最早接触web开发是通过adobe Dreamweaver，它是一个可视化的所见即所得看法工具,所见即所得说白了就是拖拖,
+	Insert sss.png
+	
+这东西特别简单，适合初学者，越是定制的东西它就显得不那么灵活，大多数人使用布局都是table来控制的，而且是table嵌入table，反复嵌套，导致代码可读性非常差，难于维护。所以div+css方式开始变得流行。
+实际上东西还是那些东西，只不过布局处理都用div来处理，div的位置由css控制，废弃的table只用于它最常用的功能，比如表单布局和数据显示。
+
+纯的html和css只能做静态效果。
+因为那些年：
+* css3还有出生，css还没有动画功能
+* js还是一个高级的东西（那时候还不懂dom）
+
+那些年的动态网页：
+* 动态修改页面内容，比如自动播放n张图片
+* 动态获取内容，增加fade,slide之类的效果
+
+随着应用开发越来越强大和时代进步，浏览器兼容性问题尤其突出。万恶的ie让所有前端开发人员都痛苦不已，苦逼的岁月被ie糟蹋了
+
+为啥ie是万恶的呢？
+* 它的js机制和其他浏览器不一样，事件模型不一样
+* 它对css解析不一样，经常需要单独处理。
+* 它太嚣张了，使用率太高，而微软又固执的不愿修改
+
+
+## 所谓的高阶写法
+
+- 基本写法是常规的css，html,js各自做本分的事情
+- 所谓高阶的方式就是通过js的模板技术，动态的去生成html和css，自行去绑定事件。这是通常js UI类库做的事情。
+
+## 基本元素 ##
+html语言是markup语言，这种语言的特点是格式固定，比如有<html>就必然有</html>对应
+
+看一个简单的hello world吧
+
+	<html>
+		<head>
+			<title>看一个简单的hello world吧</title>
+		</head>
+		<body>
+			<div>hello world,俗吧</div>	
+		</body>
+	</html>
+	
+用浏览器打开它，看到是乱码？这是为什么呢？答案是因为里面有中文字符。所以修改一下
+
+	<html>
+		<head>
+			<meta http-equiv="content-type" content="text/html;charset=utf-8">
+			<title>看一个简单的hello world吧</title>
+		</head>
+		<body>
+			<div>hello world,俗吧</div>	
+		</body>
+	</html>
+
+看看dw里的可以拖拽的控件吧
+
+
+@see component.html
+
+## 多页跳转 ##
+我们知道网站是由多个页面组成的，而页面直接通过跳转完成交互。页面跳转有3种方式：
+
+1）表单提交
+
+<form action='no320.com/formrequest.do' method='get'>
+	<input type="text" name='testfield' vaslue="i'm the input text" placeholder='我是占位的input text'/>
+	<input type='submit' value='提交'>
+</form>
+
+2）超链接
+<a href='no320.com' target='_blank'>no320.com</a>
+
+3）js方法
+
+window.location.href='no320.com';
+
+看一下例子代码
+
+	<html>
+		<head>
+			<meta http-equiv="content-type" content="text/html;charset=utf-8">
+			<title>多页跳转</title>
+		</head>
+		<body>
+			<h1>多页跳转</h1>
+			<h2>1）表单提交</h2>
+		
+				<form action='no320.com/formrequest.do' method='get'>
+					<input type="text" name='testfield' vaslue="i'm the input text" placeholder='我是占位的input text'/>
+					<input type='submit' value='提交'>
+				</form>
+		
+			<h2>2）超链接</h2>
+		
+				<a href='no320.com' target='_self'>no320.com</a> || 
+				<a href='no320.com' target='_blank'>no320.com</a> || 
+				<a href='no320.com' target='_parent'>no320.com</a>
+		
+			<h2>3）js方法</h2>
+				
+				window.location.href='no320.com';
+				<input type='button' value='点击跳转' onclick='jsClickToPage();'>
+				
+		</body>
+		<script type='text/javascript'>
+			function jsClickToPage(){	
+				alert('正在跳转到no320.com');
+				window.location.href='no320.com';
+			}
+		</script>
+	</html>
+
+
+## 表单 ##
+这里只是演示了跳转方式，那么页面之间如何传递消息呢？我们先了解一下表单是什么。
+
+表单是一种用于数据传递的形式。举个简单的例子，用户登陆，把某种商品放到购物车，这些操作都是通过表单提交来实现的。
+看一下登陆的例子:
+
+	<form action='no320.com/formrequest.do' method='get'>
+		<input type="text" name='testfield' vaslue="i'm the input text" placeholder='请输入用户名'/>
+		<input type="password" name='testfield' vaslue="i'm the input text" placeholder='请输入密码'/>
+		<input type='submit' value='提交'>
+	</form>
+
+它的格式是<form action='$1' method='$2' multy='$3'/>
+说明：
+* $1 是表单要提交到后台的地址，此地址可以处理表单请求
+* $2 是表单提交方法，一般是get和post。
+* $3 如果表单有附件上传，需要支持多部头信息
+表单提交：<input type='submit' value='提交'>
+
+常用表单控件：
+select
+input {text|button|submit|reset|hidden}
+textarea
+label
+
+## js和html交互（dom操作） ##
+比如表单校验，已前面的例子为例：如果用户输入密码少于6个字母不允许登录
+
+
+## 什么是domready
+
+我们常常是这样写
+
+	<body onload='init();'/>
+
+为何要这样写呢？
+因为在init方法的时候，页面已经加载完成。我们看到最常见的技术就是js放到页面下面加载，这样可以防止js加载
+阻塞了页面渲染。
+
+看一下我们的类库是如何实现的。
+
+	no320.domReady(function(){
+		alert(1)
+	});
+
+	$$(function(){
+		alert(2);
+	});
+
+
+	ok(function(){
+		alert(3);
+	});
+
+## 如何更改内容	
+
 
 
 ## 关于事件模型 ##
+
+- ie		：	attachEvent
+- safari	：	addEventListener
+
+给出Resig's impl
+
+    // Resig's impl
+    addEvent:function( obj, type, fn ) {
+        if ( obj.attachEvent ) {
+			//ie
+            obj['e'+type+fn] = fn;
+            obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+            obj.attachEvent( 'on'+type, obj[type+fn] );
+        } else
+            obj.addEventListener( type, fn, false );
+    }
+
 
 ## post和get ##
 
@@ -171,6 +394,62 @@ label
 ## ajax使用 ##
 以前的交互方式都是页面之间跳转或iframe来完成数据交互的。那么能不能不页面刷新就完成这样的功能交互呢？答案是ajax
 
+XHR即XMLHttpRequest，XMLHttpRequest对象是现今所有AJAX和Web 2.0应用程序的技术基础。虽然目前的主流趋势都是在提供各种AJAX(Asynchronism Javascript And Xml)框架以进一步简化XHR对象的使用，但是，了解对象的工作机制是很有必要的
+
+AJAX是一个专用术语，用于实现在客户端脚本和服务器之间的数据交互过程。此技术最大的优点就是：我们从服务器检索数据的时候不必把当前用户正在使用的页面全部回馈给服务器，它与JavaScript结合，使得更新被显示的HTML内容而不需要刷新整个页面，AJAX使得浏览器类似桌面程序，变得更有交互性。
+
+AJAX利用一个构建到浏览器内部的对象(XMLHttpRequest)来实现发送和接收HTTP请求与响应信息。经由XHR对象发送HTTP请求并不需要页面中拥有或者寄回一个<form>元素。A代表的意思是异步，这表示XHR对象请求过程可以另外开启一个线程，不影响Web页面上的其他HTML/JavaScript继续对其浏览器进行处理。需要注意的是缺省状态的情况下是异步进行的，需要同步处理只需要在open()方法中指定一下。注：同步处理会使页面的处理暂停在XHR向服务器的请求过程中，直到给XHR请求处理完成得到服务器回应后为止。
+	
+下面简单介绍一下XMLHttpRequest对象的属性及事件
+一、XHR的属性：
+1、readyState
+　　当XHR对象把一个HTTP请求发送到服务器的过程中会经历几个状态，直到请求被处理，然后才接收一个回应。readyState就是XHR请求的状态属性，它本身有5个属性值：(如下表)
+readyState属性值表
+
+readyState取值
+描述
+
+	0: request not initialized
+		描述一种"未初始化"状态；此时，已经创建一个XMLHttpRequest对象，但是还没有初始化。
+	1: server connection established
+		描述一种"发送"状态；此时，代码已经调用了XMLHttpRequest open()方法并且XMLHttpRequest已经准备好把一个请求发送到服务器。
+	2: request received 
+		描述一种"发送"状态；此时，已经通过send()方法把一个请求发送到服务器端，但是还没有收到一个响应。
+	3: processing request 
+		描述一种"正在接收"状态；此时，已经接收到HTTP响应头部信息，但是消息体部分还没有完全接收结束。
+	4: request finished and response is ready
+		描述一种"已加载"状态；此时，响应已经被完全接收。
+
+
+2、responseText
+　　responseText属性包含客户端接收到的HTTP响应的文本内容。当readyState值为0、1、2时，responseText包含一个空字符串。当readyState值为3(正在接收)时，响应中包含客户端还未完成的响应信息。当readyState为4时(以加载)时，responseText包含了完整的响应信息。
+
+3、responseXML
+　　此responseXML属性用于当接收到完整的HTTP响应时(readyState为4)描述XML响应。此时，Content-Type头部指定MIME(多功能网际邮件扩充协议)类型为text/xml，application/xml或以+xml结尾。如果Content-Type头部并不包含这些媒体类型之一，那么responseXML的值为null。无论何时，只要readyState值不为4，那么该responseXML的值也为null。其实，这个responseXML属性值是一个文档接口类型的对象，用来描述被分析的文档。如果文档不能被分析(例如，如果文档不是良构的或不支持文档相应的字符编码)，那么responseXML的值将为null。
+　　
+4、status
+　　status属性描述了HTTP请求的状态代码，其类型为short类型。而且仅当readyState值为3或4时，status属性才可以用，否则，就会引发异常。注：鉴于status的属性值较多，此处列举两个重要的属性：200表示OK，一切正常；400表示Bad Request，请求出现语法错误。
+　　
+5、statusText
+　　statusText属性描述了HTTP状态代码文本，仅当readyState值为3或4的时候才能使用。当readyState为其它值时视图存取statusText属性将引发异常。
+
+
+二、事件
+　　onreadystatechange事件：XHR中的重要事件。当readyState值发生变化的时候，XHR对象都会激发一个onreadystatechange事件。其中，onreadystatechange属性接收一个EventListener值向该方法指示无论readyState何时发生改变，该对象都将激活。
+　　
+XHR对象的方法
+　　1、abort()方法
+　　你可以使用这个abort()方法来暂停与一个XMLHttpRequest对象相联系的HTTP请求，从而把该对象复位到未初始化状态。
+　　2、open()方法
+　　你需要调用open(DOMString method，DOMString uri，boolean async，DOMString username，DOMString password)方法初始化一个XMLHttpRequest对象。其中，method参数是必须提供的-用于指定你想用来发送请求的HTTP方法(GET，POST，PUT，DELETE或HEAD)。为了把数据发送到服务器，应该使用POST方法；为了从服务器端检索数据，应该使用GET方法。在调用open()方法后，XMLHttpRequest对象把它的readyState属性设置为1(打开)并且把responseText、responseXML、status和statusText属性复位到它们的初始值。另外，它还复位请求头部。注意，如果你调用open()方法并且此时readyState为4，则XMLHttpRequest对象将复位这些值。
+　　3、send()方法
+　　在通过调用open()方法准备好一个请求之后，你需要把该请求发送到服务器。仅当readyState值为1时，你才可以调用send()方法；否则的话，XMLHttpRequest对象将引发一个异常。该请求被使用提供给open()方法的参数发送到服务器。当async参数为true时，send()方法立即返回，从而允许其它客户端脚本处理继续。在调用send()方法后，XMLHttpRequest对象把readyState的值设置为2(发送)。当服务器响应时，在接收消息体之前，如果存在任何消息体的话，XMLHttpRequest对象将把readyState设置为3(正在接收中)。当请求完成加载时，它把readyState设置为4(已加载)。对于一个HEAD类型的请求，它将在把readyState值设置为3后再立即把它设置为4。send()方法使用一个可选的参数-该参数可以包含可变类型的数据。典型地，你使用它并通过POST方法把数据发送到服务器。另外，你可以显式地使用null参数调用send()方法，这与不用参数调用它一样。对于大多数其它的数据类型，在调用send()方法之前，应该使用setRequestHeader()方法(见后面的解释)先设置Content-Type头部。如果在send(data)方法中的data参数的类型为DOMString，那么，数据将被编码为UTF-8。如果数据是Document类型，那么将使用由data.xmlEncoding指定的编码串行化该数据。
+　　4、setRequestHeader()方法
+　　该setRequestHeader(DOMString header，DOMString value)方法用来设置请求的头部信息。当readyState值为1时，你可以在调用open()方法后调用这个方法；否则，你将得到一个异常。
+　　5、getResponseHeader()方法
+　　getResponseHeader(DOMString header，value)方法用于检索响应的头部值。仅当readyState值是3或4(换句话说，在响应头部可用以后)时，才可以调用这个方法；否则，该方法返回一个空字符串。
+　　6、getAllResponseHeaders()方法
+　　该getAllResponseHeaders()方法以一个字符串形式返回所有的响应头部（每一个头部占单独的一行）。如果readyState的值不是3或4，则该方法返回null。	
 
 
 给出个简单的例子，我想在页面里加载No320.ajax.js文件，并在ajaxDiv中显示
@@ -189,17 +468,43 @@ label
 		      document.getElementById("ajaxDiv").innerHTML = xhr.responseText;
 		}
 	}
+	
 代码其实很简单。核心是XMLHttpRequest这个对象。
 她有3个方法，open和send是常规方法，用于指定请求方式和发送请求，只open没有send的话相当于没有执行
 
 另外还有一个onreadystatechange方法，此方法用于检测xhr的readyState属性变化的方法。此属性每次变化她都会调用一次。
 
 xhr的readyState属性可选值：
-	0：
-	1：
-	2：
-	3：
-	4：
+
+XHR.readyState == 状态（0，1，2，3，4）
+0：请求未初始化，还没有调用 open()。 
+1：请求已经建立，但是还没有发送，还没有调用 send()。 
+2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）。 
+3：请求在处理中；通常响应中已有部分数据可用了，没有全部完成。
+4：响应已完成；您可以获取并使用服务器的响应了
+
+XMLHttpRequest.UNSENT		= 0;
+XMLHttpRequest.OPENED		= 1;
+XMLHttpRequest.HEADERS_RECEIVED	= 2;
+XMLHttpRequest.LOADING		= 3;
+XMLHttpRequest.DONE		= 4;
+
+
+方法XHR.status常见的几种状态
+XHR.status == 200，300，404 等
+100——客户必须继续发出请求
+101——客户要求服务器根据请求转换HTTP协议版本
+
+200——成功
+201——提示知道新文件的URL
+
+300——请求的资源可在多处得到
+301——删除请求数据
+
+404——没有发现文件、查询或URl
+500——服务器产生内部错误
+
+
 
 所以我们看callback方法里，会根据readyState和status值来判断接下来我们要做的事情，以本例来讲就是xhr.responseText在ajaxDiv中显示出来。
 至此，相信你已经了解什么ajax和她的大致原理了。
@@ -305,15 +610,43 @@ CoffeeScript.load = function(url, callback) {
 
 这里唯一的就是设置了MimeType。
 
-还可以设置头部信息，比如gzip压缩等。
+还可以设置头部信息，比如字符编码，gzip压缩等。
 
 
+1.发送
+post方法传递参数
+第一步：var xhr=new XMLHttpRequest();
+第二步：xhr.open("post","register.jsp?",true);最后一个参数为是否异步加载
+第三步：xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+第四步：xhr.send(parameter);要传递的参数
+get方法
+第一步：var xhr=new XMLHttpRequest();
+第二步：xhr.open("get","register.jsp?",true);最后一个参数为是否异步加载
+第三步：xhr.send(null);
 
+获得返回的值
+2.接收
+传递的是xml文档格式
+xhr.onreadystatechange=function(){
+if(xhr.readyState==4){
+if(xhr.status==200||xhr.status==304)//status=200表示成功
+{
+var xmlDo=xhr.responseXML;
+console.dir(xmlDo);
+document.getElementByIdx_x("msg").innerHTML=xmlDo.getElementsByTagName_r("code")[0].firstChild.nodeValue;
 
+}
+注意在请求的jsp中要设置contentType="text/xml; charset=UTF-8"
+//2传递的json
+xhr.onreadystatechange=function(){
+if(xhr.readyState==4){
+if(xhr.status==200||xhr.status==304)
+{
+var json=eval_r("("+xhr.responseText+")");
+document.getElementByIdx_x("msg").innerHTML=json.name;
 
-
-
-
+}
+注意在请求的jsp中要设置contentType="text/json; charset=UTF-8"
 
 
 
@@ -330,6 +663,20 @@ CoffeeScript.load = function(url, callback) {
 
 ## js测试与压缩 ##
 
+写一个build.sh
+
+	#! /bin/bash 
+	#http://marijnhaverbeke.nl/uglifyjs
+	#http://box.inote.cc/ 挺不错的
+
+	java -jar thirdparty/compiler-latest/gccompiler.jar --js      src/No320.ajax.js --js_output_file build/No320.ajax.gc.min.js 
+
+	java -jar thirdparty/compiler-latest/yuicompressor-2.4.7.jar  src/No320.ajax.js  -o               build/No320.ajax.yui.min.js 
+
+
+
+
+
 ## js oo ##
 
 
@@ -340,4 +687,481 @@ CoffeeScript.load = function(url, callback) {
 
 
 ## 关于雅虎36条军规 ## 
+
+
+为何要这样写呢？
+因为在init方法的时候，页面已经加载完成。我们看到最常见的技术就是js放到页面下面加载，这样可以防止js加载
+阻塞了页面渲染。
+
+看一下我们的类库是如何实现的。
+
+	no320.domReady(function(){
+		alert(1)
+	});
+
+	$$(function(){
+		alert(2);
+	});
+
+
+	ok(function(){
+		alert(3);
+	});
+
+## 如何更改内容	
+
+
+
+## 关于事件模型 ##
+
+- ie		：	attachEvent
+- safari	：	addEventListener
+
+给出Resig's impl
+
+    // Resig's impl
+    addEvent:function( obj, type, fn ) {
+        if ( obj.attachEvent ) {
+			//ie
+            obj['e'+type+fn] = fn;
+            obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+            obj.attachEvent( 'on'+type, obj[type+fn] );
+        } else
+            obj.addEventListener( type, fn, false );
+    }
+
+
+## post和get ##
+
+
+
+## ajax使用 ##
+以前的交互方式都是页面之间跳转或iframe来完成数据交互的。那么能不能不页面刷新就完成这样的功能交互呢？答案是ajax
+
+XHR即XMLHttpRequest，XMLHttpRequest对象是现今所有AJAX和Web 2.0应用程序的技术基础。虽然目前的主流趋势都是在提供各种AJAX(Asynchronism Javascript And Xml)框架以进一步简化XHR对象的使用，但是，了解对象的工作机制是很有必要的
+
+AJAX是一个专用术语，用于实现在客户端脚本和服务器之间的数据交互过程。此技术最大的优点就是：我们从服务器检索数据的时候不必把当前用户正在使用的页面全部回馈给服务器，它与JavaScript结合，使得更新被显示的HTML内容而不需要刷新整个页面，AJAX使得浏览器类似桌面程序，变得更有交互性。
+
+AJAX利用一个构建到浏览器内部的对象(XMLHttpRequest)来实现发送和接收HTTP请求与响应信息。经由XHR对象发送HTTP请求并不需要页面中拥有或者寄回一个<form>元素。A代表的意思是异步，这表示XHR对象请求过程可以另外开启一个线程，不影响Web页面上的其他HTML/JavaScript继续对其浏览器进行处理。需要注意的是缺省状态的情况下是异步进行的，需要同步处理只需要在open()方法中指定一下。注：同步处理会使页面的处理暂停在XHR向服务器的请求过程中，直到给XHR请求处理完成得到服务器回应后为止。
+	
+下面简单介绍一下XMLHttpRequest对象的属性及事件
+一、XHR的属性：
+1、readyState
+　　当XHR对象把一个HTTP请求发送到服务器的过程中会经历几个状态，直到请求被处理，然后才接收一个回应。readyState就是XHR请求的状态属性，它本身有5个属性值：(如下表)
+readyState属性值表
+
+readyState取值
+描述
+
+	0: request not initialized
+		描述一种"未初始化"状态；此时，已经创建一个XMLHttpRequest对象，但是还没有初始化。
+	1: server connection established
+		描述一种"发送"状态；此时，代码已经调用了XMLHttpRequest open()方法并且XMLHttpRequest已经准备好把一个请求发送到服务器。
+	2: request received 
+		描述一种"发送"状态；此时，已经通过send()方法把一个请求发送到服务器端，但是还没有收到一个响应。
+	3: processing request 
+		描述一种"正在接收"状态；此时，已经接收到HTTP响应头部信息，但是消息体部分还没有完全接收结束。
+	4: request finished and response is ready
+		描述一种"已加载"状态；此时，响应已经被完全接收。
+
+
+2、responseText
+　　responseText属性包含客户端接收到的HTTP响应的文本内容。当readyState值为0、1、2时，responseText包含一个空字符串。当readyState值为3(正在接收)时，响应中包含客户端还未完成的响应信息。当readyState为4时(以加载)时，responseText包含了完整的响应信息。
+
+3、responseXML
+　　此responseXML属性用于当接收到完整的HTTP响应时(readyState为4)描述XML响应。此时，Content-Type头部指定MIME(多功能网际邮件扩充协议)类型为text/xml，application/xml或以+xml结尾。如果Content-Type头部并不包含这些媒体类型之一，那么responseXML的值为null。无论何时，只要readyState值不为4，那么该responseXML的值也为null。其实，这个responseXML属性值是一个文档接口类型的对象，用来描述被分析的文档。如果文档不能被分析(例如，如果文档不是良构的或不支持文档相应的字符编码)，那么responseXML的值将为null。
+　　
+4、status
+　　status属性描述了HTTP请求的状态代码，其类型为short类型。而且仅当readyState值为3或4时，status属性才可以用，否则，就会引发异常。注：鉴于status的属性值较多，此处列举两个重要的属性：200表示OK，一切正常；400表示Bad Request，请求出现语法错误。
+　　
+5、statusText
+　　statusText属性描述了HTTP状态代码文本，仅当readyState值为3或4的时候才能使用。当readyState为其它值时视图存取statusText属性将引发异常。
+
+
+二、事件
+　　onreadystatechange事件：XHR中的重要事件。当readyState值发生变化的时候，XHR对象都会激发一个onreadystatechange事件。其中，onreadystatechange属性接收一个EventListener值向该方法指示无论readyState何时发生改变，该对象都将激活。
+　　
+XHR对象的方法
+　　1、abort()方法
+　　你可以使用这个abort()方法来暂停与一个XMLHttpRequest对象相联系的HTTP请求，从而把该对象复位到未初始化状态。
+　　2、open()方法
+　　你需要调用open(DOMString method，DOMString uri，boolean async，DOMString username，DOMString password)方法初始化一个XMLHttpRequest对象。其中，method参数是必须提供的-用于指定你想用来发送请求的HTTP方法(GET，POST，PUT，DELETE或HEAD)。为了把数据发送到服务器，应该使用POST方法；为了从服务器端检索数据，应该使用GET方法。在调用open()方法后，XMLHttpRequest对象把它的readyState属性设置为1(打开)并且把responseText、responseXML、status和statusText属性复位到它们的初始值。另外，它还复位请求头部。注意，如果你调用open()方法并且此时readyState为4，则XMLHttpRequest对象将复位这些值。
+　　3、send()方法
+　　在通过调用open()方法准备好一个请求之后，你需要把该请求发送到服务器。仅当readyState值为1时，你才可以调用send()方法；否则的话，XMLHttpRequest对象将引发一个异常。该请求被使用提供给open()方法的参数发送到服务器。当async参数为true时，send()方法立即返回，从而允许其它客户端脚本处理继续。在调用send()方法后，XMLHttpRequest对象把readyState的值设置为2(发送)。当服务器响应时，在接收消息体之前，如果存在任何消息体的话，XMLHttpRequest对象将把readyState设置为3(正在接收中)。当请求完成加载时，它把readyState设置为4(已加载)。对于一个HEAD类型的请求，它将在把readyState值设置为3后再立即把它设置为4。send()方法使用一个可选的参数-该参数可以包含可变类型的数据。典型地，你使用它并通过POST方法把数据发送到服务器。另外，你可以显式地使用null参数调用send()方法，这与不用参数调用它一样。对于大多数其它的数据类型，在调用send()方法之前，应该使用setRequestHeader()方法(见后面的解释)先设置Content-Type头部。如果在send(data)方法中的data参数的类型为DOMString，那么，数据将被编码为UTF-8。如果数据是Document类型，那么将使用由data.xmlEncoding指定的编码串行化该数据。
+　　4、setRequestHeader()方法
+　　该setRequestHeader(DOMString header，DOMString value)方法用来设置请求的头部信息。当readyState值为1时，你可以在调用open()方法后调用这个方法；否则，你将得到一个异常。
+　　5、getResponseHeader()方法
+　　getResponseHeader(DOMString header，value)方法用于检索响应的头部值。仅当readyState值是3或4(换句话说，在响应头部可用以后)时，才可以调用这个方法；否则，该方法返回一个空字符串。
+　　6、getAllResponseHeaders()方法
+　　该getAllResponseHeaders()方法以一个字符串形式返回所有的响应头部（每一个头部占单独的一行）。如果readyState的值不是3或4，则该方法返回null。	
+
+
+给出个简单的例子，我想在页面里加载No320.ajax.js文件，并在ajaxDiv中显示
+
+	var xhr;
+	function testAjax() {
+	    var url = "No320.ajax.js";
+	    xhr = new XMLHttpRequest();
+	    xhr.open("POST", url, true);
+	    xhr.onreadystatechange = callback;
+	    xhr.send(null);
+	}
+
+	function callback() {
+	  	if(xhr.readyState == 4 && (xhr.status == 200||xhr.status == 0) ) {		  
+		      document.getElementById("ajaxDiv").innerHTML = xhr.responseText;
+		}
+	}
+	
+代码其实很简单。核心是XMLHttpRequest这个对象。
+她有3个方法，open和send是常规方法，用于指定请求方式和发送请求，只open没有send的话相当于没有执行
+
+另外还有一个onreadystatechange方法，此方法用于检测xhr的readyState属性变化的方法。此属性每次变化她都会调用一次。
+
+xhr的readyState属性可选值：
+
+XHR.readyState == 状态（0，1，2，3，4）
+0：请求未初始化，还没有调用 open()。 
+1：请求已经建立，但是还没有发送，还没有调用 send()。 
+2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）。 
+3：请求在处理中；通常响应中已有部分数据可用了，没有全部完成。
+4：响应已完成；您可以获取并使用服务器的响应了
+
+XMLHttpRequest.UNSENT		= 0;
+XMLHttpRequest.OPENED		= 1;
+XMLHttpRequest.HEADERS_RECEIVED	= 2;
+XMLHttpRequest.LOADING		= 3;
+XMLHttpRequest.DONE		= 4;
+
+
+方法XHR.status常见的几种状态
+XHR.status == 200，300，404 等
+100——客户必须继续发出请求
+101——客户要求服务器根据请求转换HTTP协议版本
+
+200——成功
+201——提示知道新文件的URL
+
+300——请求的资源可在多处得到
+301——删除请求数据
+
+404——没有发现文件、查询或URl
+500——服务器产生内部错误
+
+
+
+所以我们看callback方法里，会根据readyState和status值来判断接下来我们要做的事情，以本例来讲就是xhr.responseText在ajaxDiv中显示出来。
+至此，相信你已经了解什么ajax和她的大致原理了。
+
+接下来我们看一下jQuery的方法
+$.ajax
+$.get
+$.post
+$.getJSON
+$.script
+$.load
+
+原理其实也都是上面所讲的
+比如，我们简化一下get方法，我们希望
+
+	$.get("No320.ajax.js",function(respText){
+		 //alert(respText);
+		 document.getElementById("ajaxGetDiv").innerHTML = respText;
+	});
+	
+如何来实现呢？
+
+给出改进后的No320.ajax.js代码：
+	/*类机制定义*/
+	window.Class = function(name, src) {
+	    src.constructor.prototype = src;
+	    window[name] = src.constructor;
+	};
+
+	/*No320Ajax类*/
+	Class("No320Ajax", {
+		constructor: function() {
+			xhr=new XMLHttpRequest();
+			cb=function(){};
+			return this;
+		},
+		get:function(url,callback){
+			cb=callback;
+			this.__ajax(url,"GET");
+		},
+		post:function(url,callback){
+			cb=callback;
+			this.__ajax(url,"POST");
+		},
+		__ajax:function(url,type) {
+		    xhr.open(type, url, true);
+		    xhr.onreadystatechange = this.__callback;
+		    xhr.send(null);
+		},
+		__callback:function(){
+			//alert(xhr.responseText);
+			if(xhr.readyState == 4 && (xhr.status == 200||xhr.status == 0) ) {
+				cb(xhr.responseText);    
+			}
+		}
+	})
+
+看一下测试方法
+
+	//def alias
+	window.$ = new No320Ajax();
+
+	//test
+	//TODO:实现请求队列
+	function testAjax() {
+		$.get("No320.ajax.js",function(respText){
+			 //alert(respText);
+			 document.getElementById("ajaxGetDiv").innerHTML = respText;
+		});
+	
+		setTimeout(function(){
+			$.post("No320.ajax.js",function(respText){
+				//alert("post"+respText);
+				document.getElementById("ajaxPostDiv").innerHTML = respText;
+			});
+		},2000);
+	}
+
+另外我们可以看一下coffee-script/browser.js里的load实现：
+
+CoffeeScript.load = function(url, callback) {
+  var xhr;
+  xhr = new (window.ActiveXObject || XMLHttpRequest)('Microsoft.XMLHTTP');
+  xhr.open('GET', url, true);
+  if ('overrideMimeType' in xhr) {
+    xhr.overrideMimeType('text/plain');
+  }
+  xhr.onreadystatechange = function() {
+    var _ref;
+    if (xhr.readyState === 4) {
+      if ((_ref = xhr.status) === 0 || _ref === 200) {
+        CoffeeScript.run(xhr.responseText);
+      } else {
+        throw new Error("Could not load " + url);
+      }
+      if (callback) {
+        return callback();
+      }
+    }
+  };
+  return xhr.send(null);
+};
+
+这里唯一的就是设置了MimeType。
+
+还可以设置头部信息，比如字符编码，gzip压缩等。
+
+
+1.发送
+post方法传递参数
+第一步：var xhr=new XMLHttpRequest();
+第二步：xhr.open("post","register.jsp?",true);最后一个参数为是否异步加载
+第三步：xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+第四步：xhr.send(parameter);要传递的参数
+get方法
+第一步：var xhr=new XMLHttpRequest();
+第二步：xhr.open("get","register.jsp?",true);最后一个参数为是否异步加载
+第三步：xhr.send(null);
+
+获得返回的值
+2.接收
+传递的是xml文档格式
+xhr.onreadystatechange=function(){
+if(xhr.readyState==4){
+if(xhr.status==200||xhr.status==304)//status=200表示成功
+{
+var xmlDo=xhr.responseXML;
+console.dir(xmlDo);
+document.getElementByIdx_x("msg").innerHTML=xmlDo.getElementsByTagName_r("code")[0].firstChild.nodeValue;
+
+}
+注意在请求的jsp中要设置contentType="text/xml; charset=UTF-8"
+//2传递的json
+xhr.onreadystatechange=function(){
+if(xhr.readyState==4){
+if(xhr.status==200||xhr.status==304)
+{
+var json=eval_r("("+xhr.responseText+")");
+document.getElementByIdx_x("msg").innerHTML=json.name;
+
+}
+注意在请求的jsp中要设置contentType="text/json; charset=UTF-8"
+
+
+
+
+## json和jsonp,xml举例 ##
+
+## 如何使用css修改显示样式 ##
+
+## 理解css盒子模型 ##
+
+## 理解css sprite ##
+
+## 开发与调试工具 ##
+
+## js测试与压缩 ##
+
+写一个build.sh
+
+	#! /bin/bash 
+	#http://marijnhaverbeke.nl/uglifyjs
+	#http://box.inote.cc/ 挺不错的
+
+	java -jar thirdparty/compiler-latest/gccompiler.jar --js      src/No320.ajax.js --js_output_file build/No320.ajax.gc.min.js 
+
+	java -jar thirdparty/compiler-latest/yuicompressor-2.4.7.jar  src/No320.ajax.js  -o               build/No320.ajax.yui.min.js 
+
+
+
+
+
+## js oo ##
+
+
+
+## 什么是迷你类库
+
+最近，随着移动发展徐素，出现了一种轻量级的类库。
+
+
+## 关于雅虎36条军规 ## 
+
+
+## 修改cordova。*。js 
+首先要去掉
+1） ;(function(){
+	
+2） })();
+
+cordova的所有javascript内容都在此命名空间中，若不打开，如require,define等功能是无法使用的。
+
+在01.test_define_and_require_method.html中
+
+	<script type="text/javascript" charset="utf-8" src="../lib/scripts/cordova-1.7.0.no320.js"></script>
+
+	<script type="text/javascript">
+	define("no320/test", function(require, exports, module) {
+	    /**
+	     * Creates a test function used to test define and require method
+	     *
+	     * @private
+	     */
+
+		module.exports = function() {
+	        alert('看吧,define and require method好用了，你可以定义自己cordova plugin');
+		};
+
+	});
+
+	var firsttest = require('no320/test');
+	firsttest();
+	</script>
+
+当然，如果你不想依赖这么多东西，可以把
+<script type="text/javascript" charset="utf-8" src="../lib/scripts/require.js"></script>
+
+@see 01.test_define_and_require_method_single.html
+
+## 关于domready
+
+domready是body加载完成。一般页面操作都要在所有页面元素加载完成才操作的，典型的如jQuery的domready事件。
+等到加载完成之后才做操作的原因是：只有元素在页面内才会
+
+    //第一种方式：常规方式
+    var domready = require('no320/domready');
+	domready(function(){	
+		alert("INFO: <body onload> 已加载完成");
+	});
+	
+	// 第二种方式：使用别名
+	window.$ = require('no320/domready');
+	$(function(){
+		alert("INFO: <body onload> 已加载完成");
+	});
+	
+@see 02.domready.html
+
+
+## 关于dom操作
+
+
+
+
+## 关于事件
+
+最简单的事件
+
+	var d = document.getElementById('div_test');
+	d.addEventListener( 'click', function(){
+		alert(123);
+	}, false );
+
+
+
+
+## 关于AMD规范里的种种
+
+### 关于module.exports
+
+- 第一种情况
+只是返回一个函数的情况：
+	module.exports =function () {
+		console.log("INFO: <body onload> 已加载完成");
+        return ready;
+	    
+	}();
+
+这样的写法的调用
+
+	var a = require('aa/test');
+	a();
+
+- 第二种情况
+可以返回多个函数，这是=之后是一个对象，不能是函数，否则就会报错
+	module.exports ={
+		on : function( obj, type, fn ) {
+	         obj.addEventListener( type, fn, false );
+	    }
+	};
+	
+这样的写法的调用
+
+	var a = require('aa/test');
+	a。on();
+
+一般第二种方式用途会比较广。
+
+
+
+
+
+## 关于鸡
+
+- 鸡
+- 笼子
+- 吃食物
+
+细细的观察，先入槽子的鸡一般不动，一丝不苟的吃饲料。而未抢到槽子的鸡就显得可怜了，东撞撞，西撞撞，软的欺负硬的怕。
+
+换个角度看，经常四处动的小鸡可以吃到
+
+如果只有1中饲料是没有区别的
+
+
+
+
+
+
+
+
+
+
+
+
 

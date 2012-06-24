@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+   
+	<meta charset="utf-8">
+	<script type="text/javascript" charset="utf-8" src="../lib/scripts/require.js"></script>
+	
+	<script type="text/javascript" charset="utf-8" src="../src/domready.js"></script>
+		
+	
+	<script type="text/javascript" charset="utf-8" src="../src/event.js"></script>
+	
+    <script type="text/javascript">
+
+	// 第二种方式：使用别名
+	window.$ = require('no320/domready');
+	var e = require('no320/event');
+
+	$(function(){
+		/**
+		//default 
+		var d = document.getElementById('div_test');
+		d.addEventListener( 'click', function(){
+			alert(123);
+		}, false );
+		*/
+		var d = document.getElementById('div_test');
+		e.on(d,'click',function(){
+			alert(12);
+		});
+		
+	
+	
+	});
+
+ 
+    </script>
+  </head>
+  <body>
+	<h1>Hey, it's Cordova!</h1>
+	<p id='div_test' style='background-color:red'> Don't know how to get started? Check out our <em><a target="_blank" href="http://docs.phonegap.com/en/edge/guide_getting-started_ios_index.md.html#Getting%20Started%20with%20iOS">Getting Started Guide</a></em>
+	<br />
+	<ol>
+		<li>Check your console log for any white-list rejection errors.</li>
+		<li>Add your allowed <strong>hosts</strong> in Cordova.plist/ExternalHosts (wildcards OK, don't enter the URL scheme)</li>
+	</ol>
+  </body>
+</html>
