@@ -1,4 +1,4 @@
-define("no320/event", function(require, exports, module) {
+define("no320/dom", function(require, exports, module) {
     /**
      * Creates a domready event function used to callback when page onload
      *
@@ -13,9 +13,9 @@ define("no320/event", function(require, exports, module) {
 		selector:""
 	}
 	
-	dom.prototype.html = function(){
+/*	dom.prototype.html = function(){
 		
-	}
+	}*/
 
 	module.exports ={
 		byId:function(id) {
@@ -31,8 +31,14 @@ define("no320/event", function(require, exports, module) {
 	    },
 
 	    queryAll:function(query, root) {
-	        if (!query) { return []; }
-	        if (typeof query != 'string') { return this.toArray(query); }
+	        if (!query) { 
+				return []; 
+			}
+			
+	        if (typeof query != 'string') { 
+				return this.toArray(query); 
+			}
+			
 	        if (typeof root == 'string') {
 	            root = this.byId(root);
 	            if(!root){ return []; }
