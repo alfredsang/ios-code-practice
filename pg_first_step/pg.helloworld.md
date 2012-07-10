@@ -2,8 +2,9 @@ Getting Started with iOS
 ========================
 
 This guide describes how to set up your development environment for Cordova and run a sample application.
+本指南讲述的是如何设置你的Cordova的开发环境，并运行示例应用。
 
-## Video Tutorials: 
+## 视频教程: 
 
 * [Cordova Installer - Xcode 4 Template][1]
 
@@ -14,17 +15,18 @@ This guide describes how to set up your development environment for Cordova and 
 	* An Apple iOS device (iPhone, iPad, iPod Touch)
 	* iOS ceveloper certification
 
-## 2. Install SDK + Cordova 
+## 2. 安装SDK + Cordova 
 
-* Install Xcode from the [Mac App Store][3]
+* 从 [Mac App Store][3] 安装Xcode
 * Donwload the latest copy of [Cordova][4] and extract its contents. We will be working with the lib/ios directory.
+* 下载最新 [Cordova][4]版本，并解压出其内容。我们会使用lib/ios目录。？
 
-## 3. Setup New Project 
+## 3. 设置新工程 Setup New Project 
 
-* Launch Xcode
-* Select the [File][5] menu
-* Select New, then New Project...
-* Select Cordova-based Application from the list of templates
+* 启动Xcode
+* 选择 [File][5] 菜单
+* 选择New, 然后新建工程...
+*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          从模板列表选择Cordova-based Application
 
 ![choose a templates][1]
 
