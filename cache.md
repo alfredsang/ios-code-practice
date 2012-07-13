@@ -16,14 +16,27 @@ Contents
 
 Caching and purgeable memory can be vital assets to developers who are dealing with large objects that require significant memory or computation time, or developers whose code is getting bogged down as the computer writes data to disk because the RAM is full.
 
+缓存和可回收内存对那些处理大对象，需要大量内存或计算时间，或当计算机将数据写到硬盘时RAM已满时代码陷入困境的开发人来说是至关重要的的财富。
+
 This document discusses the benefits of caching, and how to avoid some of the problems that can arise from implementing caches. It also details the advantages of implementing purgeable memory into a caching system, and how to successfully implement this beneficial technology.
+
+此文档讨论的是缓存系统的益处,和如何避免一些由于缓存实现产生的问题。本文也详述了实现可回收内存的优点和如何成功的实现这项有用的技术。
+
+//--
+vital   adj.维持生命所必需的； 至关重要的； 生死攸关的； 生气勃勃的
+arise   vi.& vt.产生； 出现； 起身，起立； 起源于，产生于
 
 ## Overview of Caching 缓存概述
 
 A cache is a collection of objects or data that can greatly increase the performance of applications.
 
+缓存是可以极大提高应用性能的对象或数据的集合。
+
 ### Why Use Caching 为什么要使用缓存? 
+
 Developers use caches to store frequently accessed objects with transient data that can be expensive to compute. Reusing these objects can provide performance benefits, because their values do not have to be recalculated. However, the objects are not critical to the application and can be discarded if memory is tight. If discarded, their values will have to be recomputed again when needed.
+
+开发人员使用缓存来存储经常访问的对象,重用这些对象可以提高性能，这是因为它们的值不需要重新计算。但是，这些对象
 
 ### Problems Caching Can Cause 缓存可能引发的问题
 Although caching can provide enormous benefits in terms of performance, there are also some possible drawbacks that caching presents. Most importantly, caching can use very large amounts of memory. When caching many large data objects, it is possible to cache so many objects that there is no RAM left for other applications, and the computer will grind to a halt as it writes all of this data to disk in order to free up RAM.
