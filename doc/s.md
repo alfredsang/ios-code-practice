@@ -9,7 +9,7 @@ E-mail ： shiren1118@126.com
 自我简介：
 目前供职于财新传媒，ios高级开发工程师，主要做iOS客户端的设计与研发工作，1年obj-c开发经验＋2年javaEE电信行业经验，非常了解企业应用，数据仓库理论和iOS产品开发，可以很好的把握设计与实现的平衡。曾开发出广电行业第一套数据分析与科学决策系统，获广电总局2010科技创新奖1等奖。
 工作经历：  
-毕业前在深圳实习做webgis，毕业后2年在神州数码思特奇做电信BI，2011年4月末开始做移动开发，在北京安卓时代信息技术有限公司，从2012年2月至今，供职财新传媒
+毕业前在深圳实习做webgis，毕业后2年在神州数码思特奇做电信BI，2011年4月末开始做移动开发.
 个人经历：  
 	2008年参与翻译满江红开源组织《Grails中文文档(2008年)》
 	2009年初做半年webGis
@@ -69,14 +69,7 @@ E-mail ： shiren1118@126.com
 	2012年2月份至今，已上线，主要工作UI全部替换，性能优化，缓存处理。需求管理，bug跟踪，svn代码控制，发布，性能调优等。
 
 广东移动iPad互动演示系统
-	2011年8月-2012年2月，会议演示系统，分主讲和听讲二种角色，演示同步，圈画，小纸条，笔记（手写板），标注，QA，提问，投票，ppt缩略图，ppt备份下载，会议进度，时间控制，ppt提示说明，听讲界面里有一个和QQ浏览器类似的资源管理器。后台以类似于comet的一直长链接实现polling机制。值得说明的是这是混合型项目，比如左侧的会议列表是html实现的，而大多是OC实现，所以改写了phonegap，让它支持局部webview方式，下载用ASI，loading采用DSActivityView，xml解析，fmdb存储，使用Core Graphics画图，采用贝赛尔曲线矫正，不是很完美。进度条用MBProgressHUD，用Objective-Zip压缩解压。引入闭包，无论alertview还是asi，避免实现deletage，代码精简很多。
-
-联通3G报刊亭
-2011年4月到8月，完成《联通3G报刊亭》iphone版本的手机杂志 开发，对iScroll进行封装，增加了生命周期等，原iscroll的版本是3.7.1,我给它打了一个patch，完美支持杂志类阅读功能，已提交到github上。这是一个纯web应用，主要是html5和css3,除了iscroll和jQuery外未使用其他框架。
-
-OA系统中间件的phonegap插件开发
-2011年4月到8月，针对公司OA系统中间件，开发iOS平台插件,下载，文件管理，上传，附件阅读预览，邮件，短消息，直接拨打电话，日期控件，自定义主题等。该项目主要是开发phonegap插件，js和oc之间互相调用
-下载用ASI，loading采用DSActivityView，采用adhoc方式打包测试
+	2011年4月-2012年2月，会议演示系统，分主讲和听讲二种角色，演示同步，圈画，小纸条，笔记（手写板），标注，QA，提问，投票，ppt缩略图，ppt备份下载，会议进度，时间控制，ppt提示说明，听讲界面里有一个和QQ浏览器类似的资源管理器。后台以类似于comet的一直长链接实现polling机制。值得说明的是这是混合型项目，比如左侧的会议列表是html实现的，而大多是OC实现，所以改写了phonegap，让它支持局部webview方式，下载用ASI，loading采用DSActivityView，xml解析，fmdb存储，使用Core Graphics画图，采用贝赛尔曲线矫正，不是很完美。进度条用MBProgressHUD，用Objective-Zip压缩解压。引入闭包，无论alertview还是asi，避免实现deletage，代码精简很多。
 
 广东联通做一体化网格营销系统
 2010年10月到2011年4月，主要是报表开发，SQL报表和下钻报表（struts2＋jquery）， 界面导入，任务值导入，组件化 。另外，项目里的前端相关文档基本是我一手建立的，技术手册，设计文档，规划文档等，有200页以上，从实现原理、示例到常见错误等都有较好的阐述。 
@@ -101,7 +94,7 @@ Perl封装db2脚本库-开源项目  http://code.google.com/p/perletl/
 Cicy的面向对象基本教程  http://cicyui.com/bbs/viewthread.php?tid=247&extra=page%3D1《内蒙广电数据分析与科学系统》，获得国家广电总局"2010年度科技创新奖A类高新技术研究与开发一等奖" http://www.96066.com/zelin/News_View.asp?NewsID=139
 iscroll3扩展https://github.com/shiren1118/iscroll3
 泰然翻译构建工具https://github.com/shiren1118/ityran_article_build_tools
-扩展ant的https://github.com/shiren1118/sant
+扩展ant的https://github.com/shiren1118/sant，模仿ETL实现
 未公开的文档：
 ETL调度原理浅析.docx
 ETL小组技术文档.docx

@@ -26,11 +26,9 @@
 			document.write(index+":"+el+"<br>"); 
 		} 
 		
-		//a:a \n b:b \n c:c 
 		forEach({a:'a',b:'b',c:'c'},print); 
-		//1:笨 \n 2:蛋 \n 3:的 \n 4:座 \n 5:右 \n 6:铭 
 		
-		forEach("笨蛋的座右铭",print); 
+		forEach("PHONEGAP_IS_CORDOVA",print); 
 		
 		function Person(name, age) { 
 			this.name = name || ""; 
@@ -38,9 +36,9 @@
 		}; 
 		
 		Person.prototype = new Person; 
-		var fred = new Person("jxl", 22); 
+		var fred = new Person("shiren1118", 22); 
 		fred.language = "chinese";//极晚绑定 
-		//name:jxl \n age:22 \n language:chinese 
+		//name:shiren1118 \n age:26 \n language:chinese 
 		forEach(fred,print);
 	
 	});

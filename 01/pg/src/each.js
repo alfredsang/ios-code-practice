@@ -1,6 +1,6 @@
 define("no320/each", function(require, exports, module) {
     /**
-     * Creates a domready event function used to callback when page onload
+     * Creates a each function used to callback when page onload
      *
      * @private
      */
